@@ -1,0 +1,9 @@
+streamlit
+pandas
+numpy
+plotly
+openai
+bcrypt
+fpdf
+scikit-learn
+yfinance
