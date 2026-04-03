@@ -16,7 +16,7 @@ from auth import init_db, add_user, get_user_hash, get_all_users, check_password
 from styles import inject_login_css, inject_dashboard_css
 from backend import init_workspace, load_user_workspace, save_chat_history, get_directory_size, generate_pdf_report
 
-GROQ_API_KEY = st.secrets["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"]
+GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 WORKSPACE_BASE_DIR = "workspaces"
 
 # Initialize the SQL Database on app startup
