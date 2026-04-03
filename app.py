@@ -228,7 +228,8 @@ def show_dashboard():
         # Sign out button at bottom for thumb reachability
         st.divider()
         if st.button("🚪 Sign Out", use_container_width=True, type="secondary"):
-            clear_user_cache(st.session_state.user)
+            # Cleanly clear cache without relying on missing backend functions
+            st.cache_data.clear()
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
             st.rerun()
