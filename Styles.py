@@ -24,8 +24,10 @@ def inject_login_css():
     """, unsafe_allow_html=True)
 
 def inject_dashboard_css(theme: str):
-    if theme == "Light": bg, card_bg, text, border = "#f8fafc", "#ffffff", "#0f172a", "#e2e8f0"
-    else: bg, card_bg, text, border = "#0B0C10", "#151720", "#E0E6ED", "#1F222E"
+    if theme == "Light": 
+        bg, card_bg, text, border = "#f8fafc", "#ffffff", "#0f172a", "#e2e8f0"
+    else: 
+        bg, card_bg, text, border = "#0B0C10", "#151720", "#E0E6ED", "#1F222E"
 
     st.markdown(f"""
     <style>
@@ -38,3 +40,10 @@ def inject_dashboard_css(theme: str):
     @media (max-width: 768px) {{ .metric-card {{ padding: 15px; text-align: center; }} h2 {{ font-size: 1.5rem !important; }} [data-testid="stSidebar"] {{ padding-top: 2rem !important; }} }}
     </style>
     """, unsafe_allow_html=True)
+
+def inject_mobile_css():
+    """
+    Dummy function to satisfy the app.py import requirement.
+    Mobile CSS logic is already handled via @media queries in the functions above.
+    """
+    pass
