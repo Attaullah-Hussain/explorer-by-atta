@@ -20,8 +20,7 @@ from auth import init_db, add_user, get_user_hash, get_all_users, check_password
 from styles import inject_login_css, inject_dashboard_css, inject_mobile_css
 from backend import (
     init_workspace, load_user_workspace, save_chat_history, 
-    get_directory_size, generate_pdf_report, AsyncProcessor,
-    cache_dataframe, get_cached_dataframe, clear_user_cache
+    get_directory_size, generate_pdf_report
 )
 
 # Initialize thread pool for background tasks
