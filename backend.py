@@ -3,6 +3,7 @@ import json
 import pandas as pd
 import streamlit as st
 from fpdf import FPDF
+import tempfile
 
 WORKSPACE_BASE_DIR = "workspaces"
 
@@ -80,4 +81,14 @@ def generate_pdf_report(df, dataset_name, username):
     pdf.set_font("Arial", 'I', 9)
     pdf.set_text_color(150, 150, 150)
     pdf.cell(0, 10, "Generated automatically by the Explorer by Atta AI Engine", 0, 0, 'C')
-    return bytes(pdf.output())
+    
+    # BULLETPROOF PDF EXPORT: Save to temporary file, read bytes, delete file
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
+        pdf.output(tmp.name)
+        tmp_path = tmp.name
+        
+    with open(tmp_path, "rb") as f:
+        pdf_bytes = f.read()
+        
+    os.remove(tmp_path)
+    return pdf_bytes
