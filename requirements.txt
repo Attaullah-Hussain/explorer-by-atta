@@ -3,7 +3,9 @@ pandas
 numpy
 plotly
 openai
-bcrypt
-fpdf
+fpdf2
 scikit-learn
 yfinance
+SQLAlchemy
+psycopg2-binary
+pymysql
