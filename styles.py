@@ -19,7 +19,15 @@ def inject_login_css():
     label[data-testid="stWidgetLabel"] { display: none; }
     .vector-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 5px; background: -webkit-linear-gradient(45deg, #FFFFFF, #A0A5B5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .vector-subtitle { color: #5C6275; font-size: 0.9rem; margin-bottom: 30px; }
-    @media (max-width: 768px) { [data-testid="column"]:nth-child(1), [data-testid="column"]:nth-child(3) { display: none !important; } [data-testid="column"]:nth-child(2) { padding: 30px 25px !important; width: 100% !important; min-width: 100% !important; } [data-testid="block-container"] { padding-top: 4vh; padding-left: 1rem; padding-right: 1rem; } .vector-title { font-size: 1.8rem; } .vector-subtitle { font-size: 0.8rem; } }
+    
+    /* MOBILE FIX FOR LOGIN */
+    @media (max-width: 768px) { 
+        [data-testid="column"]:nth-child(1), [data-testid="column"]:nth-child(3) { display: none !important; } 
+        [data-testid="column"]:nth-child(2) { padding: 30px 25px !important; width: 100% !important; min-width: 100% !important; } 
+        [data-testid="block-container"] { padding-top: 4vh; padding-left: 1rem; padding-right: 1rem; } 
+        .vector-title { font-size: 1.8rem; } 
+        .vector-subtitle { font-size: 0.8rem; } 
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -37,13 +45,42 @@ def inject_dashboard_css(theme: str):
     h1, h2, h3, p, span {{ color: {text} !important; }}
     [data-testid="stChatMessage"] {{ background-color: transparent; border-radius: 10px; padding: 10px; }}
     [data-testid="stChatMessageContent"] {{ color: {text} !important; }}
-    @media (max-width: 768px) {{ .metric-card {{ padding: 15px; text-align: center; }} h2 {{ font-size: 1.5rem !important; }} [data-testid="stSidebar"] {{ padding-top: 2rem !important; }} }}
     </style>
     """, unsafe_allow_html=True)
 
 def inject_mobile_css():
-    """
-    Dummy function to satisfy the app.py import requirement.
-    Mobile CSS logic is already handled via @media queries in the functions above.
-    """
-    pass
+    """Forces Streamlit layout to be completely mobile-friendly for the Dashboard"""
+    st.markdown("""
+    <style>
+    /* MOBILE FIX FOR DASHBOARD */
+    @media (max-width: 768px) {
+        /* Columns ko ek ke neechay ek (stack) kar do */
+        [data-testid="column"] {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+            min-width: 100% !important;
+            margin-bottom: 15px !important;
+        }
+        
+        /* Dataframes ko horizontal scroll karne do */
+        [data-testid="stDataFrame"] {
+            width: 100% !important;
+            overflow-x: auto !important;
+        }
+        
+        /* Text aur Cards ko mobile ke liye set karo */
+        .metric-card { padding: 15px; text-align: center; } 
+        h2 { font-size: 1.5rem !important; } 
+        [data-testid="stSidebar"] { padding-top: 2rem !important; }
+        
+        [data-testid="stMetricValue"] {
+            font-size: 1.6rem !important;
+        }
+        
+        /* Chart container ki width 100% set karo */
+        .js-plotly-plot {
+            max-width: 100% !important;
+        }
+    }
+    </style>
+    """, unsafe_allow_html=True)
