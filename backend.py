@@ -80,4 +80,4 @@ def generate_pdf_report(df, dataset_name, username):
     pdf.set_font("Arial", 'I', 9)
     pdf.set_text_color(150, 150, 150)
     pdf.cell(0, 10, "Generated automatically by the Explorer by Atta AI Engine", 0, 0, 'C')
-    return pdf.output(dest='S').encode('latin-1')
+    return bytes(pdf.output())
