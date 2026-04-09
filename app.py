@@ -39,7 +39,7 @@ init_db()
 
 # Page config optimized for mobile
 st.set_page_config(
-    page_title="Explorer by Atta", 
+    page_title="Neat Lens", 
     page_icon="✨", 
     layout="wide", 
     initial_sidebar_state="collapsed"
@@ -977,7 +977,7 @@ def show_login():
             </div>
             <div style="font-family: 'Space Grotesk', sans-serif; font-size: 38px; font-weight: 800; 
                  color: #e2e8f0; margin-bottom: 8px; letter-spacing: -0.5px;">
-                Explorer <span style="color: #818cf8;">by Atta</span>
+                Neat <span style="color: #818cf8;">Lens</span>
             </div>
             <div style="font-size: 15px; color: #64748b; margin-bottom: 32px;">
                 Sign in to continue to your workspace
@@ -2122,7 +2122,7 @@ def show_chat(user_dir):
                     reply = future.result(timeout=30)
                     st.markdown(reply)
                     st.session_state.chat_history_db[chat_key].append({"role":"assistant","content":reply})
-                    save_chat_history(st.session_state.user)
+                    save_chat_history(st.session_state.user, st.session_state.chat_history_db[chat_key])
                 except Exception as e: st.error(f"❌ AI Error: {e}")
 
 def get_ai_response(df, messages):
