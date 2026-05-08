@@ -42,15 +42,26 @@ def save_chat_history(username, messages):
         json.dump(messages, f)
 
 def get_directory_size(path):
-    """Calculate total size of a directory"""
-    total = 0
+    """Calculate total size and total file count of a directory"""
+    total_size = 0
+    total_files = 0
+    
+    # Safety check in case the directory doesn't exist yet
+    if not os.path.exists(path):
+        return 0, 0
+        
     with os.scandir(path) as it:
         for entry in it:
             if entry.is_file():
-                total += entry.stat().st_size
+                total_size += entry.stat().st_size
+                total_files += 1  # Count this file
             elif entry.is_dir():
-                total += get_directory_size(entry.path)
-    return total
+                # If it's a folder, look inside it and add those numbers
+                sub_size, sub_files = get_directory_size(entry.path)
+                total_size += sub_size
+                total_files += sub_files
+                
+    return total_size, total_files
 
 def generate_pdf_report(df, dataset_name, username):
     """Generate a clean Executive PDF Report safely"""
